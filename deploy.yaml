@@ -36,3 +36,19 @@ ports:
     targetPort: 8081
 selector:
   app: java-quarkus-app
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: quarkus-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-java-quarkus-svc
+            port:
+              number: 80
